@@ -3,10 +3,10 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>br.com.carrefoursolucoes</groupId>
-	<artifactId>GeoMarketingBaaS</artifactId>
+	<groupId>br.com.kafka</groupId>
+	<artifactId>GeoMarketing</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
-	<name>GeoMarketingBaaS</name>
+	<name>GeoMarketing</name>
 	<description>Demo project for Spring Boot</description>
 
 	<parent>
@@ -29,7 +29,7 @@
 	<dependencies>
         <!-- Internal dependencies -->
 		<dependency>
-			<groupId>br.com.carrefoursolucoes</groupId>
+			<groupId>br.com.kafka</groupId>
 			<artifactId>commons</artifactId>
 			<version>1.0-SNAPSHOT</version>
 		</dependency>
