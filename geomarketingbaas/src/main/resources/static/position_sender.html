@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 80%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <div>
+      <select name="cliente" id="cliente_id" >
+        <option value="33628146-3319-429b-a0fe-769f2e4fa81e">Daniel Pablo</option>
+        <option value="b9d77685-8c55-45db-a048-6b986fd0527b">Pepito</option>
+
+      </select>
+    </div>
+    <script>
+      var map;
+      function initMap() {
+        var data = {lat: -23.60552, lng: -46.66855}
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: data,
+          zoom: 15
+        });
+        var marker = new google.maps.Marker({
+              position: data,
+              map: map
+            });
+        // Listen for clicks and add the location of the click to firebase.
+
+        map.addListener('click', function(e) {
+
+
+            var id = document.getElementById('cliente_id').value;
+
+
+            data.lat = e.latLng.lat();
+            data.lng = e.latLng.lng();
+            data.idCliente = id;
+
+            marker.setMap(null);
+            marker = new google.maps.Marker({
+              position: data,
+              map: map
+            });
+            httpGet(data);
+          });
+        
+      }
+
+      function httpGet(pos)
+      {
+          console.log(JSON.stringify(pos));
+          var xmlhttp = new XMLHttpRequest();
+          xmlhttp.open("POST", "http://localhost:9090/geo_marketing/posicao_cliente", true);
+          xmlhttp.setRequestHeader("Content-type", "application/json");
+          xmlhttp.send( JSON.stringify(pos) );
+          return xmlhttp.responseText;
+      }
+
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAIQDNUl7LFM887rKUawwuAvO-lZi_SM9w&callback=initMap"
+    async defer></script>
+  </body>
+</html>
